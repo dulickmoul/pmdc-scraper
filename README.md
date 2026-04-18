@@ -1,5 +1,13 @@
 # PMDC Scraper (Registration + Qualification Pipeline)
 
+## Preview
+
+Example output (pmdc_licenses.csv):
+
+| RegistrationNo | Name | Status |
+|----------------|------|--------|
+| 12345-P        | Dr X | Active |
+
 ## Overview
 
 This project extracts healthcare practitioner data from the Pakistan Medical and Dental Council (PMDC) public API.
