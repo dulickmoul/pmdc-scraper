@@ -2,7 +2,7 @@
 
 ## Preview
 
-Example output (pmdc_licenses.csv):
+Example output (`pmdc_licenses.csv`):
 
 | RegistrationNo | Name | Status |
 |----------------|------|--------|
@@ -189,6 +189,6 @@ Solutions:
 
 ## Author
 
-Dulick  
+**Dulick**  
 Data Operations Coordinator — Veeva  
 Healthcare data (Vietnam, Pakistan, Singapore)
