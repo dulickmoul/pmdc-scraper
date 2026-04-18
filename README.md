@@ -32,7 +32,7 @@ The API limits results per query, so this scraper:
   - A → AA → AB → ...
 - Continues recursively until all records are covered
 
-All Registration Numbers are stored in: seen.sqlite
+All Registration Numbers are stored in: `seen.sqlite`
 
 ---
 
@@ -45,19 +45,19 @@ For each Registration Number:
   - Doctor profile
   - Qualifications list
 - Outputs:
-  - pmdc_licenses.csv
-  - pmdc_qualifications.csv
+  - `pmdc_licenses.csv`
+  - `pmdc_qualifications.csv`
 
 ---
 
 ### 3. Resume support
 
-Progress is saved in: state.json
+Progress is saved in: `state.json`
 
 Phases:
-- enumerate_prefixes
-- fetch_qualifications
-- done
+- `enumerate_prefixes`
+- `fetch_qualifications`
+- `done`
 
 The script resumes automatically if interrupted.
 
@@ -68,12 +68,16 @@ The script resumes automatically if interrupted.
 Some records may fail or return empty data.
 
 Run:
+
+```bash
 python src/retry_quals.py retry_missing_quals.csv
+```
 
 ---
 
 ## Visual Pipeline
 
+```text
 PMDC /GetData
    ↓
 Prefix enumeration (A → Z → AA → AAA)
@@ -93,11 +97,13 @@ state.json → enumerate → fetch → done
 
 Recovery:
 retry_missing_quals.csv → retry_quals.py
+```
 
 ---
 
 ## Project structure
 
+```text
 pmdc-scraper/
 ├── src/
 │   ├── pmdc_accuracy_scraper.py
@@ -107,36 +113,53 @@ pmdc-scraper/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
+```
 
 ---
 
 ## Installation
 
+```bash
 pip install -r requirements.txt
+```
 
 ---
 
 ## Run
 
+```bash
 python src/pmdc_accuracy_scraper.py
+```
 
 ---
 
 ## Output
 
-- pmdc_licenses.csv
-- pmdc_qualifications.csv
-- prefix_audit.csv
+- `pmdc_licenses.csv`
+- `pmdc_qualifications.csv`
+- `prefix_audit.csv`
 
 ---
 
 ## Metrics
 
-- Prefix-based enumeration to expand coverage
-- Split threshold ~20,000 per prefix
-- SQLite deduplication (seen.sqlite)
-- Resume via state.json
-- Retry flow for missing qualifications
+### Example run (local)
+
+- Total prefixes processed: 1,898
+- Total successful prefixes: 1,826
+- Total prefixes split: 72
+- Total new registration numbers collected: 385,611
+- Output files generated:
+  - `pmdc_licenses.csv`
+  - `pmdc_qualifications.csv`
+- Pipeline supports resume via `state.json`
+
+### Pipeline characteristics
+
+- Split threshold: ~20,000 records per prefix
+- Prefix expansion depth: up to 3 levels (`A → AA → AAA`)
+- Deduplication: SQLite (`seen.sqlite`)
+- Recovery: `retry_quals.py` for missing records
 
 ---
 
