@@ -1,0 +1,7 @@
+outputs/
+*.sqlite
+*.db
+state.json
+__pycache__/
+*.pyc
+.env
